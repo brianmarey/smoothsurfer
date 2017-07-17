@@ -1,46 +1,55 @@
 package com.careydevelopment.smoothsurfer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+
+import com.careydevelopment.smoothsurfer.entity.Images;
+import com.careydevelopment.smoothsurfer.repository.ImagesRepository;
+import com.careydevelopment.smoothsurfer.util.Constants;
+import com.careydevelopment.smoothsurfer.util.PaginationHelper;
 
 @SpringBootApplication
 public class Application  implements CommandLineRunner {
 	
     @Autowired
-    private CustomerRepository repository;
+    private ImagesRepository repository;
     
     @Override
     public void run(String... args) throws Exception {
         System.err.println("here we go");
 
-        repository.deleteAll();
-
-        // save a couple of customers
-        repository.save(new Customer("Alice", "Smith"));
-        repository.save(new Customer("Bob", "Smith"));
-
-        // fetch all customers
-        System.out.println("Customers found with findAll():");
-        System.out.println("-------------------------------");
-        for (Customer customer : repository.findAll()) {
-            System.out.println(customer);
-        }
-        System.out.println();
-
-        // fetch an individual customer
-        System.out.println("Customer found with findByFirstName('Alice'):");
-        System.out.println("--------------------------------");
-        System.out.println(repository.findByFirstName("Alice"));
-
-        System.out.println("Customers found with findByLastName('Smith'):");
-        System.out.println("--------------------------------");
-        for (Customer customer : repository.findByLastName("Smith")) {
-            System.out.println(customer);
-        }
+    	int page = PaginationHelper.getPage("1");
+    	
+    	Pageable pageable = new PageRequest(page, Constants.RESULTS_PER_PAGE);
+    	
+    	//Page<Images> imageSet = repository.queryFirst12ByOrderByDateDesc(pageable);
+    	//System.err.println("imageset is " + imageSet.getSize());
+    	
+    	Slice<Images> images = repository.findTop12ByOrderByDateDesc(pageable);
+    	System.err.println(images.getNumberOfElements());
+    	System.err.println(images.getSize());
+    	
+    	List<Images> ims = images.getContent();
+    	
+    	for (Images im : ims) {
+    		System.err.println(im.getImage() + " " + im.getDate());
+    	}
+//    	List<Images> images = new ArrayList<Images>();
+//    	
+//    	for (Images image : imageSet) {
+//    		images.add(image);
+//    		//System.err.println(image.getImage() + " " + image.getDate());
+//    	}
     }
 
+    
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
     }

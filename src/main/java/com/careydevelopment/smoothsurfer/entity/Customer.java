@@ -1,4 +1,4 @@
-package com.careydevelopment.smoothsurfer;
+package com.careydevelopment.smoothsurfer.entity;
 
 import org.springframework.data.annotation.Id;
 

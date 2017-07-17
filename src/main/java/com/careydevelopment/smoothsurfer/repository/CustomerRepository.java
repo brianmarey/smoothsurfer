@@ -1,8 +1,10 @@
-package com.careydevelopment.smoothsurfer;
+package com.careydevelopment.smoothsurfer.repository;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.careydevelopment.smoothsurfer.entity.Customer;
 
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 
