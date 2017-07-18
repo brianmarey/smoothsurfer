@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+    <head>
+        <title>Reaction GIFs | Carey Development, LLC</title>
+        <meta content="Thymeleaf table demo" name="description" />
+        <object th:include="fragments/head :: head" th:remove="tag"></object>
+    </head>
+    
+    <body class="page-container-bg-solid">
+        <div th:include="fragments/topmenuheader :: header"></div>
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-head" style="background-color:#eff3f8;padding-top:40px">
+                    <div class="container">
+                            
+                            
+	                    <div class="row">
+		                    <div class="col-md-4 col-lg-4">&nbsp;</div>
+		                    <div class="col-md-4 col-lg-4" style="text-align:center"><span th:text="${showingResults}" style="font-size:18pt;text-align:center"></span></div>
+		                    <div class="col-md-4 col-lg-4" style="margin-bottom:60px">&nbsp;</div>
+	                    </div>
+	                                        
+	                    <div th:each="image : ${images}" class="row" style="margin-bottom:60px">
+	                    	<div class="col-md-2 col-lg-2">&nbsp;</div>
+	                    	
+	                    	<div class="col-md-8 col-lg-8" style="text-align:center">
+	                    		<a th:href="${image.link}" target="_blank"><img th:src="${image.link}" style="max-width:600px"/></a>
+	                    	</div>
+	                    	
+	                    	<div class="col-md-2 col-lg-2">&nbsp;</div>
+	                    </div>
+	                    
+	                   	<div class="row">
+							<div class="col-md-4 col-lg-4">&nbsp;</div>
+							<div class="col-md-4 col-lg-4" style="text-align:center">
+								<span th:if="${isFirst} == false" style="margin-right:20px;font-size:14pt"><a th:href="@{viewReactionGifs(pageNum=${previousPageNum})}" class="paginationText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></span>
+								<span th:if="${isLast} == false" style="margin-left:20px;font-size:14pt"><a th:href="@{viewReactionGifs(pageNum=${nextPageNum})}" class="paginationText">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></a></span>
+							</div>
+							<div class="col-md-4 col-lg-4">&nbsp;</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="fragments/homefooter :: footer"></div>
+    </body>
+</html>

@@ -1,10 +1,8 @@
 package com.careydevelopment.smoothsurfer.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -20,25 +18,25 @@ import com.careydevelopment.smoothsurfer.util.PaginationHelper;
 
 
 @Controller
-public class ViewFunnyImagesController {
+public class ViewFemaleImagesController {
 	
 	@Autowired
 	ImagesRepository imagesRepository;
 	
-    @RequestMapping("/viewFunnyImages")
+    @RequestMapping("/viewFemaleImages")
     public String viewFunnyImages(Model model, @RequestParam(value="pageNum", required=false) String pageNum) {
     	
     	int page = PaginationHelper.getPage(pageNum);
     	
     	Pageable pageable = new PageRequest(page, Constants.RESULTS_PER_PAGE);
 
-    	Slice<Images> images = imagesRepository.findTop12ByCategoryOrderByDateDesc("Funny",pageable);
+    	Slice<Images> images = imagesRepository.findTop12ByCategoryOrderByDateDesc("Females",pageable);
     	List<Images> ims = images.getContent();
     	
     	PaginationHelper.setPagination(images,model,page);
    
     	model.addAttribute("images", ims);
-    	model.addAttribute("urlPath","/viewFunnyImages");
+    	model.addAttribute("urlPath","/viewFemaleImages");
     	
         //get out
         return "chiveImages";

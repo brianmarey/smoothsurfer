@@ -26,7 +26,7 @@ public class LinkRetriever {
 	
 	
 	public enum FetchType {
-		MORNING_AWESOMENESS, AFTERNOON_RANDOMNESS;
+		MORNING_AWESOMENESS, AFTERNOON_RANDOMNESS, GIRLS;
 	}
 	
 	public LinkRetriever(String url, FetchType fetchType) {
@@ -36,6 +36,9 @@ public class LinkRetriever {
 		if (this.fetchType.equals(FetchType.AFTERNOON_RANDOMNESS)) {
 			this.anchorSearch = "Afternoon Randomness";
 			this.urlSearch = "randomness";
+		} else if (this.fetchType.equals(FetchType.GIRLS)) {
+			this.anchorSearch = "Photos";
+			this.urlSearch = "photos";
 		}
 	}
 
@@ -47,6 +50,10 @@ public class LinkRetriever {
 			this.url = "http://thechive.com/?s=randomness";
 			this.anchorSearch = "Afternoon Randomness";
 			this.urlSearch = "randomness";
+		} else if (fetchType.equals(FetchType.GIRLS)) {
+			this.url = "http://thechive.com/category/girls/";
+			this.anchorSearch = "Photos";
+			this.urlSearch = "photos";
 		}
 	}
 	

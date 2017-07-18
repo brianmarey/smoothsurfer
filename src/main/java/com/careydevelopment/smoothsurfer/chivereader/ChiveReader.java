@@ -18,24 +18,23 @@ public class ChiveReader {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ChiveReader.class);
 	
-	private LinkRetriever.FetchType fetchTypes[] = {LinkRetriever.FetchType.AFTERNOON_RANDOMNESS, LinkRetriever.FetchType.MORNING_AWESOMENESS};	
-
-	private boolean persistedImages = false;
+	private LinkRetriever.FetchType fetchTypes[] = {LinkRetriever.FetchType.AFTERNOON_RANDOMNESS, 
+			LinkRetriever.FetchType.MORNING_AWESOMENESS, LinkRetriever.FetchType.GIRLS};	
 	
 	@Autowired
 	ImagesRepository repository;
-	
+		
 	
 	public void launch() {
 		try {
 			for (LinkRetriever.FetchType fetchType : fetchTypes) {
-				persistedImages = false;
+				String category = getCategory(fetchType);
 				
 				LinkRetriever retriever = new LinkRetriever(fetchType);
 				
 				List<String> urls = retriever.getLinks();
 				urls.forEach((link) -> {
-					if (!persistedImages) getImagesFromLink(link);
+					getImagesFromLink(link, category);
 				});
 				
 				String nextPageLink = retriever.getNextPageLink();
@@ -51,7 +50,16 @@ public class ChiveReader {
 	}
 	
 	
-	private void getImagesFromLink(String link) {
+	private String getCategory(LinkRetriever.FetchType fetchType) {
+		if (fetchType.equals(LinkRetriever.FetchType.GIRLS)) {
+			return "Females";
+		} else {
+			return "Funny";
+		}
+	}
+	
+	
+	private void getImagesFromLink(String link, String category) {
 		LOGGER.debug("Looking at link " + link);
 
 		try {
@@ -59,7 +67,7 @@ public class ChiveReader {
 			List<String> images = retriever.getImages();
 			
 			images.forEach((image) -> {
-				persistImage(image, retriever.getDate());
+				persistImage(image, retriever.getDate(), category);
 			});
 		} catch (Exception e) {
 			LOGGER.error("Problem retrieving images from link " + link, e);
@@ -67,14 +75,14 @@ public class ChiveReader {
 	}
 	
 	
-	private void persistImage(String image, Date date) {
+	private void persistImage(String image, Date date, String category) {
 		LOGGER.debug("checking on " + image);
-
+		
 		Images foundImage = repository.findByImage(image);
 		
 		if (foundImage == null) {
 			Images im = new Images();
-			im.setCategory("Funny");
+			im.setCategory(category);
 			im.setDate(date);
 			im.setImage(image);
 			im.setKeys(new ArrayList<String>());
@@ -82,8 +90,6 @@ public class ChiveReader {
 			repository.save(im);
 		
 			LOGGER.debug("persisted " + image);
-			
-			persistedImages = true;
 		}
 	}
 }
