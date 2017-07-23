@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+    <head>
+        <title>Funny Images | Carey Development</title>
+        <meta content="Funny Images from The Chive" name="description" />
+        <link rel="stylesheet" type="text/css" href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" />
+	    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" />
+	    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" />
+	    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" />
+	    
+	    <link rel="stylesheet" id="style_components" type="text/css" href="/assets/global/css/components.min.css" />
+	    <link rel="stylesheet" type="text/css" href="/assets/global/css/plugins.min.css" />
+	    
+	    <link rel="stylesheet" type="text/css" href="/assets/layouts/layout3/css/layout.min.css" />
+	    <link rel="stylesheet" type="text/css" id="style_color" href="/assets/layouts/layout3/css/themes/default.min.css" />
+	    <link rel="stylesheet" type="text/css" href="/assets/layouts/layout3/css/custom.min.css" />
+	    
+	    <link rel="shortcut icon" href="/images/careydevicon.png" /> 
+	            
+	    <link rel="stylesheet" type="text/css" href="/assets/pages/css/about.min.css" />
+	    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+    </head>
+    
+    <body class="page-container-bg-solid" ng-app = "funnyImagesApp">
+		<div>
+		    <div class="page-header">
+		        <div class="page-header-top">
+		            <div class="container">
+		                <div class="page-logo">
+		                    <a href="/">
+		                        <img alt="logo" style="margin-top:5px" src="/images/careydevlogosm.png" />
+		                    </a>
+		                </div>
+		                <a href="javascript:;" class="menu-toggler"></a>
+		            </div>
+		        </div>            
+		        <div class="page-header-menu">
+		            <div class="container">
+		                <div class="hor-menu  ">
+		                    <ul class="nav navbar-nav">
+		                        <li class="menu-dropdown classic-menu-dropdown">
+		                            <a href="http://careydevelopment.us"> Home
+		                            </a>
+		                        </li>
+		                        <li class="menu-dropdown classic-menu-dropdown">
+		                            <a href="/thymeleafTable"> Funny Images
+		                            </a>
+		                        </li>
+		                     </ul>
+		                 </div>
+		             </div>
+		         </div>
+		    </div>
+		</div>
+        <div class="page-container">
+            <div class="page-content-wrapper">
+                <div class="page-head" style="background-color:#eff3f8;padding-top:40px">
+                    <div class="container" ng-controller = "FunnyImagesController" >        
+	                    <div class="row">
+		                    <div class="col-md-4 col-lg-4">&nbsp;</div>
+		                    <div class="col-md-4 col-lg-4" style="text-align:center"><span style="font-size:18pt;text-align:center">{{showingResults(images.startingResult,images.endingResult)}}</span></div>
+		                    <div class="col-md-4 col-lg-4" style="margin-bottom:60px">&nbsp;</div>
+	                    </div>
+	                                        
+	                    <div ng-repeat="image in images.results" class="row" style="margin-bottom:60px">
+	                    	<div class="col-md-2 col-lg-2">&nbsp;</div>
+	                    	
+	                    	<div class="col-md-8 col-lg-8" style="text-align:center">
+	                    		<img src="{{image.image}}" style="max-width:600px"/>
+	                    	</div>
+	                    	
+	                    	<div class="col-md-2 col-lg-2">&nbsp;</div>
+	                    </div>
+	                    
+	                   	<div class="row">
+							<div class="col-md-4 col-lg-4">&nbsp;</div>
+							<div class="col-md-4 col-lg-4" style="text-align:center">
+								<span ng-if="images.firstPage == false" style="margin-right:20px;font-size:14pt"><a href="/chiveImages.html?pageNum={{images.previousPageNumber}}" class="paginationText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a></span>
+								<span ng-if="images.lastPage == false" style="margin-left:20px;font-size:14pt"><a href="/chiveImages.html?pageNum={{images.nextPageNumber}}" class="paginationText">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></a></span>
+							</div>
+							<div class="col-md-4 col-lg-4">&nbsp;</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--[if lt IE 9]>
+    <script th:src="@{/assets/global/plugins/respond.min.js}"></script>
+    <script th:src="@{/assets/global/plugins/excanvas.min.js}"></script> 
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script type="text/javascript" src="/assets/global/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/jquery.blockui.min.js"></script>
+    <script type="text/javascript" src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script type="text/javascript" src="/assets/global/scripts/app.min.js"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script type="text/javascript" src="/assets/layouts/layout3/scripts/layout.min.js"></script>
+    <script type="text/javascript" src="/assets/layouts/layout3/scripts/demo.min.js"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script type="text/javascript" src="/assets/global/scripts/request.js"></script>
+   	<script type="text/javascript" src="/assets/pages/scripts/funnyImagesApp.js"></script>
+   	<script type="text/javascript" src="/assets/pages/scripts/funnyImagesController.js"></script>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+ var funnyImagesApp = angular.module("funnyImagesApp", [])
