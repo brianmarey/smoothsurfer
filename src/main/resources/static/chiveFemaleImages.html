@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
     <head>
-        <title>Funny Images | Carey Development</title>
+        <title>Female Images | Carey Development, LLC</title>
         <meta content="Female Images from The Chive" name="description" />
         <link rel="stylesheet" type="text/css" href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" />
 	    <link rel="stylesheet" type="text/css" href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" />
@@ -24,7 +24,12 @@
 	    <link rel="shortcut icon" href="/images/careydevicon.png" /> 
 	            
 	    <link rel="stylesheet" type="text/css" href="/assets/pages/css/about.min.css" />
-	    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+	    
+	    <style>
+	    	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+			    display: none !important;
+			}
+	    </style>
     </head>
     
     <body class="page-container-bg-solid" ng-app = "femaleImagesApp">
@@ -61,7 +66,7 @@
         <div class="page-container">
             <div class="page-content-wrapper">
                 <div class="page-head" style="background-color:#eff3f8;padding-top:40px">
-                    <div class="container" ng-controller = "FemaleImagesController" >        
+                    <div class="container" ng-cloak ng-controller="FemaleImagesController">        
 	                    <div class="row">
 		                    <div class="col-md-4 col-lg-4">&nbsp;</div>
 		                    <div class="col-md-4 col-lg-4" style="text-align:center"><span style="font-size:18pt;text-align:center">{{showingResults(images.startingResult,images.endingResult)}}</span></div>
@@ -95,6 +100,7 @@
     <script th:src="@{/assets/global/plugins/excanvas.min.js}"></script> 
     <![endif]-->
     <!-- BEGIN CORE PLUGINS -->
+   	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
     <script type="text/javascript" src="/assets/global/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
