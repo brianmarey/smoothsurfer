@@ -21,7 +21,7 @@ public class LatestChiveImageReader {
 	@Scheduled(fixedDelay=86400000)
 	void getFunnyImagesFromReddit() {		
 		taskExecutor.execute(() -> {
-			//chiveReader.launch();
+			chiveReader.launch();
 		});
 	}
 }
